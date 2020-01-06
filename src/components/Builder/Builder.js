@@ -73,18 +73,18 @@ function displayMarketingMessage(callback, config) {
 
 export async function init() {
   return fetchToppings()
-  .then((options) => {
-    const initial = options.reduce((sorted, option) => {
-      const { type } = option;
-      if (sorted.has(type)) {
-        sorted.set(type, [...sorted.get(type), option]);
+    .then((options) => {
+      const initial = options.reduce((sorted, option) => {
+        const { type } = option;
+        if (sorted.has(type)) {
+          sorted.set(type, [...sorted.get(type), option]);
+          return sorted;
+        }
+        sorted.set(type, [option]);
         return sorted;
-      }
-      sorted.set(type, [option]);
-      return sorted;
-    }, new Map());
-    return [...initial];
-  });
+      }, new Map());
+      return [...initial];
+    });
 }
 
 export default () => ({
