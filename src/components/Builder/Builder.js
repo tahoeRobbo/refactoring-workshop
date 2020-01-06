@@ -38,8 +38,8 @@ function getUnavailableMessage() {
 }
 
 function addTopping(name) {
-    toppings = [...toppings, name];
-    return toppings;
+  toppings = [...toppings, name];
+  return toppings;
 }
 
 function checkToppingLimit(toppings) {
@@ -53,9 +53,9 @@ function checkToppingLimit(toppings) {
   return null;
 }
 
-function removeTopping({ name }) {
+function removeTopping(topping) {
   const copy = [...toppings];
-  const index = copy.indexOf(name);
+  const index = copy.lastIndexOf(topping);
   copy.splice(index, 1);
   toppings = [...copy];
   return toppings;
@@ -73,18 +73,18 @@ function displayMarketingMessage(callback, config) {
 
 export async function init() {
   return fetchToppings()
-    .then((options) => {
-      const initial = options.reduce((sorted, option) => {
-        const { type } = option;
-        if (sorted.has(type)) {
-          sorted.set(type, [...sorted.get(type), option]);
-          return sorted;
-        }
-        sorted.set(type, [option]);
+  .then((options) => {
+    const initial = options.reduce((sorted, option) => {
+      const { type } = option;
+      if (sorted.has(type)) {
+        sorted.set(type, [...sorted.get(type), option]);
         return sorted;
-      }, new Map());
-      return [...initial];
-    });
+      }
+      sorted.set(type, [option]);
+      return sorted;
+    }, new Map());
+    return [...initial];
+  });
 }
 
 export default () => ({

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Options from '../Options/Options';
 import Choices from '../Choices/Choices';
 import Builder from '../Builder/Builder';
-import { generateDisplayName } from '../Builder/utils';
 import Modal from '../Modal/Modal';
 
 export default function PizzaMaker() {
@@ -58,15 +57,12 @@ export default function PizzaMaker() {
     if(marketingMessage) {
       setMarketingMessage(marketingMessage);
     }
-
-    const toppingsUpdate = generateDisplayName(toppings);
-    setToppings(toppingsUpdate);
+    setToppings(toppings);
   };
 
   const handleRemove = (topping) => {
     const toppingsList = removeTopping(topping);
-    const toppingsUpdate = generateDisplayName(toppingsList);
-    setToppings(toppingsUpdate);
+    setToppings(toppingsList);
   };
 
   return (
